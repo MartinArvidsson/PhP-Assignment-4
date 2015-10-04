@@ -3,7 +3,7 @@
 
 class LayoutView {
   
-  public function render($isLoggedIn, $response, DateTimeView $dtv) { //Skickar in Sessionen, beroende om den finns eller inte skrivs Logged in eller Not Logged in ut.
+  public function render($isLoggedIn,$doesuserwanttoreg, $v, DateTimeView $dtv) {
     echo '<!DOCTYPE html>
       <html>
         <head>
@@ -12,10 +12,11 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
+          ' . $this->renderhref($doesuserwanttoreg) . '
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
           
           <div class="container">
-              ' . $response . '
+              ' . $v->response() . '
               
               ' . $dtv->show() . '
           </div>
@@ -30,6 +31,18 @@ class LayoutView {
     }
     else {
       return '<h2>Not logged in</h2>';
+    }
+  }
+  
+  public function renderhref($doesuserwanttoreg) //TODO
+  {
+    if($doesuserwanttoreg) //TODO
+    {
+      return "<a href='?'>Go back to Login</a>";
+    }
+    else
+    {
+      return "<a href='?Register'"."'>Register a new user</a>";
     }
   }
 }

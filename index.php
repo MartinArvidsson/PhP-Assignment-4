@@ -3,11 +3,8 @@ require_once('controller/Mastercontroller.php');
 
 $mc = new Mastercontroller;
 
-
-//INCLUDE THE FILES NEEDED...
-
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-mc();
+$mc->Startapplication();
