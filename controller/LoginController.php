@@ -15,7 +15,7 @@ class LoginController{
     public function Init()
     {
         $this->checkLogin();
-        $this->LayoutView->render($this->Model->Issessionset(),true,$this->View,$this->Datetime);
+        $this->LayoutView->render($this->Model->Issessionset(),false,$this->View,$this->Datetime);
     }
     
     public function checkLogin(){ //Kollar om man vill logga in eller ut beroende på vad funktionerna i LoginView säger rad 83-97

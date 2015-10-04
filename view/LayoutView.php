@@ -36,7 +36,7 @@ class LayoutView {
   
   public function renderhref($doesuserwanttoreg) //TODO
   {
-    if($doesuserwanttoreg) //TODO
+    if($doesuserwanttoreg) //TODO stuff
     {
       return "<a href='?'>Go back to Login</a>";
     }
