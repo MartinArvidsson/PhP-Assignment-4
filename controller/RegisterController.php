@@ -1,8 +1,11 @@
 <?php
 
 class RegisterController{
+    private $Username;
+    private $Password;
+    private $RepeatPassword;
     
-    public function __construct(Registerview $rv,RegisterModel $rm,Datetimeview $dtv,LayoutView $lv)
+    public function __construct(Registerview $rv,RegisterDAL $rm,Datetimeview $dtv,LayoutView $lv)
     {
         $this->rv = $rv;
         $this->rm = $rm;
@@ -18,7 +21,8 @@ class RegisterController{
     
     private function RegisterUser()
     {
-        
+        //Hämta data från regview, skicka till RegisterDAL
+        $this->rm->RegisterUser($this->rv->getUsername(),$this->rv->getPassword(),$this->rv->getRepeatPassword());
     }
     
 }

@@ -61,4 +61,9 @@ class registerview{
 	{
 	    return $_POST[self::$Password];
 	}
+	
+	public function getRepeatPassword()
+	{
+		return $_POST[self::$RepeatedPassword];
+	}
 }
