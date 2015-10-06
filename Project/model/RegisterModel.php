@@ -20,9 +20,9 @@ class RegisterModel
         $this->RepeatPasswordtoval = $_RepeatPassword;
         
         
-        if($this->ValidateUser($Usernametorval,$Passwordtorval,$RepeatPasswordtoval) == true)
+        if($this->ValidateUser($this->Usernametorval,$this->Passwordtorval,$this->RepeatPasswordtoval) == true)
         {
-            $this->RegisterDAL->AddUser($Usernametorval,$Passwordtorval,$RepeatPasswordtoval);
+            $this->RegisterDAL->AddUser($this->Usernametorval,$this->Passwordtorval,$this->RepeatPasswordtoval);
         }
     }
     
@@ -30,12 +30,14 @@ class RegisterModel
     {
         $ListofUsers = $this->RegisterDAL->GetAllUsers(); //<- Does not work, .bin file not yet created, need to learn Serialize first.
         //Will check if username already exists in the list of registed users. 
-        
-        foreach($ListofUsers as $RegistedUsers)
+        if($ListofUsers != null)
         {
-            if($Usernametorval == $RegistedUsers->getUsername())
+            foreach($ListofUsers as $RegistedUsers)
             {
-                $this->Registermessage = "User exists, pick another username."
+                if($Usernametorval == $RegistedUsers->getUsername())
+                {
+                    $this->Registermessage = "User exists, pick another username.";
+                }
             }
         }
         if(strip_tags($Usernametorval) != $Usernametorval)
