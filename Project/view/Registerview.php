@@ -6,12 +6,21 @@ class registerview{
 	private static $Password = 'Registerview::Password';
 	private static $RepeatedPassword = 'Registerview::RepeatedPassword';
 	private static $RegisterUser = 'Registerview::Register';
-	private static $Message = 'Registerview::Message';
-	private static $Savedname ="";
+	private static $MessageID = 'Registerview::Message';
+	
+	private $RegModel;		
+	private $message;
+
+	
+	public function __construct(RegisterModel $_RegModel)
+	{
+		$this->Regmodel = $_RegModel;
+	}
 	
 	
 	public function response()
 	{
+		$message = $this->Regmodel->getMessage();
 	    return $this->GenerateRegistrationForm("");
 	}
 	
@@ -23,9 +32,9 @@ class registerview{
 	    <form method="post" >
          <fieldset>
          <legend>Register a new user - Write username and password</legend>
-         <p id="'. self::$Message .'"> '.$Message.' </php> 
+         <p id="'. self::$MessageID .'"> '.$Message.' </php> 
          <label for="' . self::$Username . '">Username :</label>
-	   	 <input type="text" id="' . self::$Username . '" name="' . self::$Username . '" value="'. self::$Savedname .'" /> 
+	   	 <input type="text" id="' . self::$Username . '" name="' . self::$Username . '" value="'. $this->getUsername() .'" /> 
 	   	 <br>
 	   	 <label for="' . self::$Password . '">Password :</label>
 	   	 <input type="password" id="' . self::$Password . '" name="' . self::$Password . '" value="" /> 
@@ -46,15 +55,19 @@ class registerview{
 	    {
 	        return true;
 	    }
-	    else
-	    {
-	        return false;
-	    }
+	    return false;
 	}
 	
 	public function getUsername()
 	{
-	    return $_POST[self::$Username];
+	    if(isset($_POST[self::$Username]))
+		{
+			return $_POST[self::$Username];
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	public function getPassword()

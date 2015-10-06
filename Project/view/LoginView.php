@@ -87,6 +87,7 @@ class LoginView {
 		}
 		return false;
 	}
+	
 	public function doesUserWantToLogout(){ //Kollar om login  är tryckt eller ej för logout 
 		if(isset($_POST[self::$logout]))
 		{

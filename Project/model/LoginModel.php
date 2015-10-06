@@ -4,6 +4,8 @@ class LoginModel{
 
 private static $CorrectUsername = "Admin"; //The Correct information needed to be able to login
 private static $CorrectPassword = "Password";
+//Byt ut ovanstående till att hämta data från REGISTERDAL, läs användarnamn där.
+
 private $UserUserName; //The user inputs will go here
 private $UserPassword;
 private $IsUserLoggedIn;
