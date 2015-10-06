@@ -5,7 +5,7 @@ class RegisterController{
     private $Password;
     private $RepeatPassword;
     
-    public function __construct(Registerview $rv,RegisterDAL $rm,Datetimeview $dtv,LayoutView $lv)
+    public function __construct(Registerview $rv,RegisterModel $rm,Datetimeview $dtv,LayoutView $lv)
     {
         $this->rv = $rv;
         $this->rm = $rm;

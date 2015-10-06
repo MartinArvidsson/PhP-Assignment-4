@@ -10,6 +10,7 @@ require_once('model/LoginModel.php');
 require_once('view/Registerview.php');
 require_once('controller/RegisterController.php');
 require_once('model/RegisterModel.php');
+require_once('model/RegisterDAL.php');
 
 
 class Mastercontroller{
@@ -22,30 +23,27 @@ class Mastercontroller{
     
     $uri = $_SERVER["REQUEST_URI"];
     $uri = explode("?",$uri);
+
     
-    $rm = new RegisterModel();
-    $rv = new Registerview($rm);
-    $rc = new RegisterController($rv,$rm,$dtv,$lv);
-    
-    $lm = new LoginModel(); //Annars körs view.
-    $v = new LoginView($lm); 
-    $lc = new LoginController($v,$lm,$dtv,$lv);
+
     
     if(count($uri) > 1 && $uri[1] == "Register")
     {
-    
+    $rd = new RegisterDAL();    
+    $rm = new RegisterModel($rd);
+    $rv = new Registerview($rm);
+    $rc = new RegisterController($rv,$rm,$dtv,$lv);
     
     $rc->Init();
     }
     else
     {
-    
+    $lm = new LoginModel(); //Annars körs view.
+    $v = new LoginView($lm); 
+    $lc = new LoginController($v,$lm,$dtv,$lv);
     
     $lc->Init();
     }
 }
 
 }
-
-//Skapa mastercontroller, ska kolla url, OM den inehåller 'register' kör en registercontroller som kallar på registerview som skapar hyperlänk till layoutmodel som kallar på registerview
-//som skapar en hyperlänk till registercontroller....

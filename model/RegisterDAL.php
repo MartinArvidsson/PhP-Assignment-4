@@ -1,21 +1,15 @@
 <?php
 
-class RegisterDAL{
-private $Usernametoreg;
-private $Passwordtoreg;
-private $RepeatPasswordtoreg;
+class RegisterDAL
+{
 
-    public function RegisterUser($_Username,$_Password,$_RepeatPassword)
+    public function AddUser()
     {
-        $this->Usernametoreg = $_Username;
-        $this->Passwordtoreg = $_Password;
-        $this->RepeatPasswordtoreg = $_RepeatPassword;
         
-        //Kolla om användarnamn innehåller kod, eller är för kort
-        
-        
-        
-        //Kolla om lösenordet inehåller kod, är för kort eller inte matchar repeatpassword
     }
     
+    public function GetAllUsers()
+    {
+        
+    }
 }
