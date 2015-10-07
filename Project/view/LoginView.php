@@ -73,7 +73,7 @@ class LoginView {
 	*/
 	private function generateLoginFormHTML($message) { //Koden för login formuläret
 		return '
-			<a href="?Register">Register</a>
+			<a href="?Register">Register a new user</a>
 			<form method="post" >
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
