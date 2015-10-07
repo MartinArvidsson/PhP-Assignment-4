@@ -21,7 +21,7 @@ class registerview{
 	public function response()
 	{
 		$message = $this->Regmodel->getMessage();
-	    return $this->GenerateRegistrationForm("");
+	    return $this->GenerateRegistrationForm($message);
 	}
 	
 	private function GenerateRegistrationForm($Message)
@@ -32,7 +32,8 @@ class registerview{
 	    <form method="post" >
          <fieldset>
          <legend>Register a new user - Write username and password</legend>
-         <p id="'. self::$MessageID .'"> '.$Message.' </php> 
+         <p id="'. self::$MessageID .'"> '.$Message.' </p>
+         
          <label for="' . self::$Username . '">Username :</label>
 	   	 <input type="text" id="' . self::$Username . '" name="' . self::$Username . '" value="'. $this->getUsername() .'" /> 
 	   	 <br>
