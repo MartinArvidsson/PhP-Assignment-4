@@ -24,6 +24,11 @@ class LoginView {
 	 *
 	 * @return  void BUT writes to standard output and cookies!
 	 */
+	
+	public function setamessage($valuetoset){
+		$this->message = $valuetoset;
+	} 
+	 
 	public function response() {
 		$message = $this->Model->GetMessage(); //Beroende på vad meddelandet säger visas antingen logout eller login
 		$response = "";
@@ -60,7 +65,8 @@ class LoginView {
 	*/
 	private function generateLoginFormHTML($message) { //Koden för login formuläret
 		return '
-			<form method="post" > 
+			<a href="?Register">Register</a>
+			<form method="post" >
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
 					<p id="' . self::$messageId . '">' . $message . '</p>

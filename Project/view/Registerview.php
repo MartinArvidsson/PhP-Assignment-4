@@ -28,7 +28,7 @@ class registerview{
 	{
 	    return '
 	    <h2>Register a new user</h2>
-	    
+	    <a href="?">Back to login</a>
 	    <form method="post" >
          <fieldset>
          <legend>Register a new user - Write username and password</legend>

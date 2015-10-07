@@ -3,7 +3,7 @@
 
 class LayoutView {
   
-  public function render($isLoggedIn,$doesuserwanttoreg, $v, DateTimeView $dtv) {
+  public function render($isLoggedIn, $v, DateTimeView $dtv) {
     echo '<!DOCTYPE html>
       <html>
         <head>
@@ -12,7 +12,6 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
-          ' . $this->renderhref($doesuserwanttoreg) . '
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
           
           <div class="container">
@@ -33,16 +32,5 @@ class LayoutView {
       return '<h2>Not logged in</h2>';
     }
   }
-  
-  public function renderhref($doesuserwanttoreg) //TODO
-  {
-    if($doesuserwanttoreg) //TODO stuff
-    {
-      return "<a href='?'>Back to Login</a>";
-    }
-    else
-    {
-      return "<a href='?Register'"."'>Register a new user</a>";
-    }
-  }
+
 }
