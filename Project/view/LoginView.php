@@ -37,6 +37,7 @@ class LoginView {
 		else
 		{
 			$message = "Registered new user.";
+			$_SESSION['SUCCESSFULREG'] = false;
 		}
 		$response = "";
 		

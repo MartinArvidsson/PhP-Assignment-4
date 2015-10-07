@@ -9,6 +9,7 @@ class RegisterDAL
     public function AddUser($Username,$Password)
     {
         //Lägg till en ny användare.
+        $this->users = $this->GetAllUsers();
         
         array_push($this->users,new User($Username,$Password));
         
