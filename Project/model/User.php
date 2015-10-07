@@ -8,6 +8,8 @@ class User
     public function __construct($_Username,$_Password)
     {
         $this->Username = $_Username;
+        
+        $_Password = hash('sha1', $_Password);
         $this->Password = $_Password;
     }
     

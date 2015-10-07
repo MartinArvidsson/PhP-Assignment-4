@@ -38,7 +38,7 @@ class LayoutView {
   {
     if($doesuserwanttoreg) //TODO stuff
     {
-      return "<a href='?'>Go back to Login</a>";
+      return "<a href='?'>Back to Login</a>";
     }
     else
     {

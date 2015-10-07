@@ -22,7 +22,10 @@ class RegisterModel
         
         if($this->ValidateUser($this->Usernametorval,$this->Passwordtorval,$this->RepeatPasswordtoval) == true)
         {
-            $this->RegisterDAL->AddUser($this->Usernametorval,$this->Passwordtorval,$this->RepeatPasswordtoval);
+            $this->RegisterDAL->AddUser($this->Usernametorval,$this->Passwordtorval);
+            
+            header("Location: ?");
+            
         }
     }
     
