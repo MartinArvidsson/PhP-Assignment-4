@@ -16,8 +16,8 @@ class RegisterController{
         {
             if($this->rm->RegisterUser($this->rv->getUsername(),$this->rv->getPassword(),$this->rv->getRepeatPassword()))
             {
-                $this->lv->setamessage($this->rv->getMessage());
-                return $this->lv;
+                    $_SESSION['SUCCESSFULREG'] = true;
+                    header("Location:?");
             }
             else
             {

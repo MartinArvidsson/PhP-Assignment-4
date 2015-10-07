@@ -11,10 +11,14 @@ class LoginView {
 	private static $messageId = 'LoginView::Message';
 	
 	private $Model;
-	private $message;
 	
 	public function __construct(LoginModel $Model){
 		$this -> Model = $Model;
+		
+	 	if(!isset($_SESSION['SUCCESSFULREG']))
+	 	{
+	 		$_SESSION['SUCCESSFULREG'] = false;
+	 	}
 	}
 
 	/**
@@ -24,13 +28,16 @@ class LoginView {
 	 *
 	 * @return  void BUT writes to standard output and cookies!
 	 */
-	
-	public function setamessage($valuetoset){
-		$this->message = $valuetoset;
-	} 
 	 
 	public function response() {
-		$message = $this->Model->GetMessage(); //Beroende på vad meddelandet säger visas antingen logout eller login
+		if($_SESSION['SUCCESSFULREG'] == false)
+		{
+			$message = $this->Model->GetMessage(); //Beroende på vad meddelandet säger visas antingen logout eller login
+		}
+		else
+		{
+			$message = "Registered new user.";
+		}
 		$response = "";
 		
 		if($this->Model->Issessionset())

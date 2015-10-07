@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('controller/Mastercontroller.php');
 
 $mc = new Mastercontroller;
