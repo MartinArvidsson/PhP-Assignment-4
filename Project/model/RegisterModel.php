@@ -6,7 +6,7 @@ class RegisterModel
     private $RepeatPasswordtoval;
     private $RegisterDAL;
     private $ListofUsers;
-    private $Registermessage;
+    private $Registermessage = "";
     public function __construct(RegisterDAL $_RegisterDAL)
     {
         $this->RegisterDAL = $_RegisterDAL;
@@ -22,7 +22,6 @@ class RegisterModel
         if($this->ValidateUser($this->Usernametorval,$this->Passwordtorval,$this->RepeatPasswordtoval) == true)
         {
             $this->RegisterDAL->AddUser($this->Usernametorval,$this->Passwordtorval);
-            $this->Registermessage = "Sucess!";
             return true;
         }
     }
@@ -31,7 +30,36 @@ class RegisterModel
     {
         $ListofUsers = $this->RegisterDAL->GetAllUsers(); //<- Does not work, .bin file not yet created, need to learn Serialize first.
         //Will check if username already exists in the list of registed users. 
-        if($ListofUsers != null)
+        if(strip_tags($Usernametorval) != $Usernametorval)
+        {
+            $this->Registermessage ="Username contains invalid characters.";
+        }
+        elseif(strip_tags($Passwordtorval) != $Passwordtorval)
+        {
+            $this->Registermessage ="password contains invalid characters.";
+        }
+        elseif(strlen($Usernametorval) < 3 && strlen($Passwordtorval) < 6)
+        {
+            $this->Registermessage ="Username has too few characters, at least 3 characters. Password has too few characters, at least 6 characters.";
+        }        
+        elseif(strlen($Usernametorval) < 3)
+        {
+            $this->Registermessage ="Username has too few characters, at least 3 characters.";
+        }
+        elseif(ctype_space($Passwordtorval) || strlen($Passwordtorval) < 6)
+        {
+            $this->Registermessage ="Password has too few characters, at least 6 characters.";
+        }
+        elseif(strlen($Passwordtorval) < 6)
+        {
+            $this->Registermessage ="Password has too few characters, at least 6 characters.";
+        }
+        elseif($Passwordtorval != $RepeatPasswordtoval)
+        {
+            $this->Registermessage ="Passwords do not match.";
+        }
+        
+        elseif($ListofUsers != null)
         {
             foreach($ListofUsers as $RegistedUsers)
             {
@@ -41,37 +69,15 @@ class RegisterModel
                 }
             }
         }
-        if(strip_tags($Usernametorval) != $Usernametorval)
-        {
-            $this->Registermessage ="Username contains invalid characters.";
-        }
-        if(strip_tags($Passwordtorval) != $Passwordtorval)
-        {
-            $this->Registermessage ="password contains invalid characters.";
-        }
-        if(strlen($Usernametorval) < 3 && strlen($Passwordtorval) < 6)
-        {
-            $this->Registermessage ="Username has too few characters, at least 3 characters. Password has too few characters, at least 6 characters.";
-        }
-        if(ctype_space($Passwordtorval) || strlen($Passwordtorval) < 6)
-        {
-            $this->Registermessage ="Password has too few characters, at least 6 characters.";
-        }
-        if(strlen($Usernametorval) < 3)
-        {
-            $this->Registermessage ="Username has too few characters, at least 3 characters.";
-        }
-        if(strlen($Passwordtorval) < 6)
-        {
-            $this->Registermessage ="Password has too few characters, at least 6 characters.";
-        }
-        if($Passwordtorval != $RepeatPasswordtoval)
-        {
-            $this->Registermessage ="Passwords do not match.";
-        }
         
-        return true;
-        
+        if($this->Registermessage == "")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
     

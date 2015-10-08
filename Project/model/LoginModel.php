@@ -26,39 +26,42 @@ class LoginModel
     
     public function CheckLogin($_Passwordtovalidate,$_Usernametovalidate) //Kollar logininformationen, och beroende om den matchar eller inte händer olika scenarion
     {
-        $_Passwordtovalidate = hash('sha1', $_Passwordtovalidate);
         $this->Passwordtovalidate = $_Passwordtovalidate;
         $this->Usernametovalidate = $_Usernametovalidate;
+        $ListofUsers = $this->RegisterDAL->GetAllUsers(); //<- Does not work, .bin file not yet created, need to learn Serialize first.
         
         if($this->Usernametovalidate == '')
         {
             $this->LoginMessage = "Username is missing";    
         }
-        elseif($this->Usernametovalidate != '' && $this->Passwordtovalidate === ''){
+        elseif($this->Passwordtovalidate == ''){
             $this->LoginMessage = "Password is missing";
         }
-        
-        $ListofUsers = $this->RegisterDAL->GetAllUsers(); //<- Does not work, .bin file not yet created, need to learn Serialize first.
-        //Will check if username already exists in the list of registed users.
-        if($ListofUsers != null)
+        elseif($ListofUsers != null)        //Will check if username already exists in the list of registed users.
         {
+            $_Passwordtovalidate = hash('sha1', $_Passwordtovalidate);
+            $this->Passwordtovalidate = $_Passwordtovalidate;
             foreach($ListofUsers as $RegistedUsers)
             {
-                if($this->Usernametovalidate != $RegistedUsers->getUsername())
-                {
-                     $this->LoginMessage = "Wrong name or password";
-                }
-                elseif($this->Passwordtovalidate != $RegistedUsers->getPassword())
-                {
-                     $this->LoginMessage = "Wrong name or password";
-                }                
-                elseif($this->Usernametovalidate == $RegistedUsers->getUsername() && $this->Passwordtovalidate == $RegistedUsers->getPassword())
+                if($this->Usernametovalidate == $RegistedUsers->getUsername() && $this->Passwordtovalidate == $RegistedUsers->getPassword())
                 {
                     if($_SESSION['USERLOGGEDIN'] == false)
-                {
+                    {
                     $this->LoginMessage = "Welcome";
-                }
+                    }
                     $_SESSION['USERLOGGEDIN'] = true;
+                    break;
+                }
+                else
+                {
+                    if($this->Usernametovalidate != $RegistedUsers->getUsername())
+                    {
+                         $this->LoginMessage = "Wrong name or password";
+                    }
+                    elseif($this->Passwordtovalidate != $RegistedUsers->getPassword())
+                    {
+                         $this->LoginMessage = "Wrong name or password";
+                    }
                 }
             }
         }

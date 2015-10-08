@@ -12,12 +12,13 @@ class RegisterController{
     public function Init()
     {
          //Hämta data från regview, skicka till RegisterDAL
-        if($this->rv->Doesuserwanttoregister())
+        if($this->rv->Doesuserwanttoregister() == true)
         {
-            if($this->rm->RegisterUser($this->rv->getUsername(),$this->rv->getPassword(),$this->rv->getRepeatPassword()))
+            if($this->rm->RegisterUser($this->rv->getUsername(),$this->rv->getPassword(),$this->rv->getRepeatPassword()) ==  true)
             {
                     $_SESSION['SUCCESSFULREG'] = true;
-                    header("Location:?");
+                    $link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+                    header("Location:$link");
             }
             else
             {
