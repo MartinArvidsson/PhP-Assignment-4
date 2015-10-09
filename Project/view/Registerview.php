@@ -65,6 +65,7 @@ class registerview{
 	    if(isset($_POST[self::$Username]))
 		{
 			$this->savedusername = strip_tags($_POST[self::$Username]);
+			$_SESSION['SAVEDUSERNAME'] = strip_tags($_POST[self::$Username]);
 			return $_POST[self::$Username];
 		}
 		else

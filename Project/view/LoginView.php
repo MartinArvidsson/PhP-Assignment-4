@@ -11,6 +11,7 @@ class LoginView {
 	private static $messageId = 'LoginView::Message';
 	
 	private $Model;
+	private $SavedUsername;
 	
 	public function __construct(LoginModel $Model){
 		$this -> Model = $Model;
@@ -18,6 +19,11 @@ class LoginView {
 	 	if(!isset($_SESSION['SUCCESSFULREG']))
 	 	{
 	 		$_SESSION['SUCCESSFULREG'] = false;
+	 	}
+	 	
+	 	if(!isset($_SESSION['SAVEDUSERNAME']))
+	 	{
+	 		$_SESSION['SAVEDUSERNAME'] = "";
 	 	}
 	}
 
@@ -78,9 +84,8 @@ class LoginView {
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
 					<p id="' . self::$messageId . '">' . $message . '</p>
-					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $this->getUsername() . '" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $_SESSION['SAVEDUSERNAME'] . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -114,6 +119,7 @@ class LoginView {
 	public function getUsername(){ //Hämtar ut användarnamn
 		if(isset($_POST[self::$name]))
 		{
+			$_SESSION['SAVEDUSERNAME'] = $_POST[self::$name];
 			return $_POST[self::$name];
 		}
 		else
